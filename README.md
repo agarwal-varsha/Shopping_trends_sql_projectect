@@ -68,6 +68,8 @@ Compare spending habits of subscribed versus non-subscribed customers.
 1. Display positive customer reviews on product pages to build trust and influence buyers.
 2. Send follow-up emails encouraging customers to leave reviews.
 
+**Discounts and promotional codes did not significantly affect the average purchase amount.**
+
 # Conclusion
 By focusing on popular products, capitalizing on seasonal trends, targeting key demographics, optimizing payment options, and leveraging positive reviews, businesses can effectively increase their sales and improve overall performance. Implementing these strategies will attract more customers, boost engagement, and drive higher revenue.
 
