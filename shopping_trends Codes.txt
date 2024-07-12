@@ -1,0 +1,123 @@
+1. Top Product Analysis 
+   Grouped the data by product and category, summed up the sales amounts, and sorted the results to show the top products by sales to      find out which products and categories generate the most revenue
+
+   Code: 
+   SELECT item_purchased, category, SUM(purchase_amount_usd) AS total_amount
+   FROM shopping_trends
+   GROUP BY item_purchased, category
+   ORDER BY total_amount DESC
+   LIMIT 10;
+
+2. Top Category Analysis
+   Grouped the data by category and summed up the sales amounts, then sorted to find the top categories to understand which product categories are most profitable.
+
+   Code:
+   SELECT category, SUM(purchase_amount_usd) AS total_amount
+   FROM shopping_trends
+   GROUP BY category
+   ORDER BY total_amount DESC
+   LIMIT 10;
+
+3. Seasonal Trends 
+   Used GROUP BY to aggregate data by season and performed calculations to find the total and average sales amounts and transaction    counts to understand how sales vary by season and identify periods of high sales potential.
+
+   Code:
+   SELECT season, SUM(purchase_amount_usd) AS total_amount, AVG(purchase_amount_usd) AS average_amount, COUNT(*) AS count
+   FROM shopping_trends
+   GROUP BY season;
+
+4. Customer Demographics Analysis
+   Altered the table to add the age_group column, updated it with age group classifications, and then grouped data by age group and gender to calculate average purchase amounts to understand spending behavior across different age groups and genders for targeted marketing.
+
+   Code:
+   ALTER TABLE shopping_trends
+   ADD COLUMN age_group VARCHAR(50);
+
+   UPDATE shopping_trends
+   SET age_group = CASE
+       WHEN age BETWEEN 0 AND 12 THEN 'CHILD'
+       WHEN age BETWEEN 13 AND 18 THEN 'TEEN'
+       WHEN age BETWEEN 19 AND 25 THEN 'YOUNG ADULT'
+       WHEN age BETWEEN 26 AND 50 THEN 'ADULT'
+       WHEN age BETWEEN 51 AND 65 THEN 'SENIOR'
+       WHEN age >= 66 THEN 'OLD'
+      ELSE 'Unknown'
+   END;
+
+   SELECT age_group, gender, AVG(purchase_amount_usd) AS average_amount
+   FROM shopping_trends
+   GROUP BY age_group, gender;
+
+5. Effectiveness of Discounts
+   Used the CASE statement to classify transactions by discount status and calculated the average purchase amount for each group to evaluate whether discounts increase average purchase amounts.
+
+   Code:
+   SELECT 
+	CASE
+	WHEN discount_applied THEN 'WITH_DISCOUNT'
+	ELSE 'WITHOUT_DISCOUNT'
+   END AS discount_status,
+   COUNT(*),
+   AVG(purchase_amount_usd) AS average_purchase_amount
+   FROM shopping_trends
+   GROUP BY discount_status;
+
+6. Payment Method Preferences
+   Grouped data by payment method and calculated the average purchase amounts and transaction counts to identify popular payment methods and offer incentives or promotions for these methods.
+
+   Code: 
+   SELECT payment_method, AVG(purchase_amount_usd) AS average_amt, COUNT(*)
+   FROM shopping_trends
+   GROUP BY payment_method
+   ORDER BY COUNT(*) DESC;
+
+7. Customer Segmentation Based on Purchase Frequency
+   Grouped data by purchase frequency and calculated average amounts and transaction counts to understand customer behavior based on how often they make purchases.
+
+   Code:
+   SELECT frequency_of_purchases, AVG(purchase_amount_usd) AS average_amt, COUNT(*)
+   FROM shopping_trends
+   GROUP BY frequency_of_purchases
+   ORDER BY COUNT(*) DESC;
+
+8. Promotional Code Impact Analysis
+   Grouped data by promo code usage, calculated average purchase amounts, total sales, and transaction counts to evaluate the effectiveness of promotional codes in increasing sales.
+
+   Code: 
+   SELECT promo_code_used, AVG(purchase_amount_usd) AS average_amt, SUM(purchase_amount_usd) AS total_purchase_amount, COUNT(*)
+   FROM shopping_trends
+   GROUP BY promo_code_used
+   ORDER BY COUNT(*) DESC;
+
+9. Shipping Type Analysis
+   Grouped the data by shipping type and summed up the sales amounts for each shipping method to find out which shipping methods are associated with higher spending.
+
+   Code:
+   SELECT shipping_type, SUM(purchase_amount_usd) AS total_amount
+   FROM shopping_trends
+   GROUP BY shipping_type;
+
+10. Review Sentiment Analysis
+    Grouped the data by review rating and calculated average purchase amounts and total sales for each rating to see if positive reviews lead to more spending.
+ 
+    Code:
+    SELECT review_rating, AVG(purchase_amount_usd), SUM(purchase_amount_usd) AS total_amount
+    FROM shopping_trends
+    GROUP BY review_rating
+    ORDER BY review_rating DESC;
+
+11. Subscription vs. Non-Subscription Purchase Behavior
+    Grouped the data by subscription status and calculated average purchase amounts and transaction counts for each group to determine how subscription status affects spending behavior.
+
+    Code:
+    SELECT subscription_status, AVG(purchase_amount_usd) AS average_amount, COUNT(*) AS transaction_count
+    FROM shopping_trends
+    GROUP BY subscription_status;
+
+
+
+
+
+   
+
+
